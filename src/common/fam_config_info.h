@@ -100,6 +100,7 @@ inline std::string find_config_file(char *config_file) {
         if (stat(config_file_path, &buffer) == 0) {
             config_filename = config_file_path;
             free(config_file_path);
+            free(config_file);
             return config_filename;
         } else {
             std::ostringstream message;
@@ -114,6 +115,7 @@ inline std::string find_config_file(char *config_file) {
     if (stat(config_file_path, &buffer) == 0) {
         config_filename = config_file_path;
         free(config_file_path);
+        free(config_file);
         return config_filename;
     }
 
@@ -123,6 +125,7 @@ inline std::string find_config_file(char *config_file) {
     // exist and OPENFAM_ROOT not set", error);
 
     free(config_file_path);
+    free(config_file);
     config_filename.clear();
     return config_filename;
 }
@@ -139,15 +142,15 @@ inline std::string login_username(void) {
     loginName = getlogin();
 
     if (loginName != NULL)
-        return std::string(strdup(loginName));
+        return std::string(loginName);
 
     loginUid = getuid();
     loginPwName = getpwuid(loginUid);
 
     if (loginPwName != NULL)
-        return std::string(strdup(loginPwName->pw_name));
+        return std::string(loginPwName->pw_name);
     else
-        return std::string(strdup(""));
+        return std::string("");
 }
 } // namespace openfam
 #endif
