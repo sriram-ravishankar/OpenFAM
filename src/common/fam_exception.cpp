@@ -59,9 +59,7 @@ char const *Fam_Exception::fam_error_msg() const noexcept {
     return famErrMsg.c_str();
 }
 
-char const *Fam_Exception::what() const noexcept {
-    return famErrMsg.c_str();
-}
+char const *Fam_Exception::what() const noexcept { return famErrMsg.c_str(); }
 
 int Fam_Exception::fam_error() const noexcept {
     return famErr;
